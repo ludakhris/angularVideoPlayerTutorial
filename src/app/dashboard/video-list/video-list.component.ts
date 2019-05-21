@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 
 import { Video } from '../../app-types';
 
@@ -10,28 +10,23 @@ import { Video } from '../../app-types';
 export class VideoListComponent implements OnInit {
 
   @Input() videolist: Video[] = [];
-
-  selectedVideo: Video | undefined;
+  @Input() selectedVideo: Video | undefined;
+  @Output() videoSelected = new EventEmitter<Video>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  onSelect(v: Video) {
-    this.selectedVideo = v;
-  }
-
-  shouldHighlight(v: Video) {
-    if (this.selectedVideo !== undefined && v.id === this.selectedVideo.id) {
-      return 'card  blue darken-4';
-    } else {
-      return 'card  blue darken-3';
-    }
+  selectVideo(v: Video) {
+    this.videoSelected.emit(v);
   }
 
   shouldBold(v: Video) {
-    if (this.selectedVideo !== undefined && v.id === this.selectedVideo.id) {
+    if (typeof this.selectedVideo === 'undefined') {
+      return false;
+    }
+    if (v.id === this.selectedVideo.id) {
       return true;
     } else {
       return false;

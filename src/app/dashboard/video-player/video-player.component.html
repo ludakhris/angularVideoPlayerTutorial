@@ -1,3 +1,9 @@
-<p>
-  video-player works!
-</p>
+<div *ngIf="!selectedVideo">Select a video, no video selected.</div>
+<div *ngIf="selectedVideo"
+    class="card">
+    <div class="card-content">
+      <h3>{{ selectedVideo?.title }}</h3>
+      <p>{{ selectedVideo?.author }}</p>
+    </div>
+  </div>
+  

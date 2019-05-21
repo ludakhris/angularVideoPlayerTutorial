@@ -19,4 +19,19 @@ export class VideoCardDetailsComponent implements OnInit {
   ngOnInit() {
   }
 
+  shouldHighlight(v: Video) {
+    if (this.selected) {
+      return 'card  blue darken-4';
+    } else {
+      return 'card  blue darken-3';
+    }
+  }
+
+  shouldBold(v: Video) {
+    if (this.selected) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
