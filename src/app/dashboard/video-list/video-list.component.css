@@ -1,0 +1,11 @@
+.card {
+    color: white;
+    height: 150px;
+}
+.bold {
+    font-weight: bold !important;
+    
+}
+.selectedDisplay {
+    font-size: 1em;
+}
