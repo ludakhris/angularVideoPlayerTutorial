@@ -1,7 +1,10 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Observable } from 'rxjs';
+import { pluck, share, switchMap } from 'rxjs/operators';
 
 import { Video } from '../../app-types';
+import { VideoDataService } from 'src/app/video-data.service';
 
 @Component({
   selector: 'app-video-list',
@@ -12,9 +15,16 @@ export class VideoListComponent implements OnInit {
 
   @Input() videolist: Video[] = [];
   @Input() selectedVideoId: string | undefined;
+  selectedVideo: Observable<Video>;
   // @Output() videoSelected = new EventEmitter<Video>();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, route: ActivatedRoute, svc: VideoDataService) {
+    this.selectedVideo = route.params.pipe(
+      pluck<Params, string>('videoId'),
+      switchMap(id => svc.getVideo(id)),
+      share()
+    );
+  }
 
   ngOnInit() {
   }

@@ -1,9 +1,16 @@
-<div *ngIf="!selectedVideo">Select a video, no video selected.</div>
-<div *ngIf="selectedVideo"
+<div *ngIf="!(selectedVideo | async)">Select a video, no video selected.</div>
+<div *ngIf="(selectedVideo | async) as v; else noneSelected"
     class="card">
     <div class="card-content">
-      <h3>{{ selectedVideo?.title }}</h3>
-      <p>{{ selectedVideo?.author }}</p>
+      <h3>{{ v?.title }}</h3>
+      <p>{{ v?.author }}</p>
+    </div>
+</div>
+
+<ng-template #noneSelected>
+  <div class="card">
+    <div class="card-content">
+      <h3>Please Select a Video!</h3>
     </div>
   </div>
-  
+</ng-template>

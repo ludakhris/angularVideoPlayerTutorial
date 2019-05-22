@@ -35,4 +35,8 @@ export class VideoDataService {
         ))
       );
   }
+
+  getVideo(vid: string): Observable<Video> {
+    return this.http.get<Video>(`${apiUrl}/videos/${vid}`);
+  }
 }
