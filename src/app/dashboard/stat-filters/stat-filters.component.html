@@ -1,3 +1,84 @@
-<p>
-  stat-filters works!
-</p>
+<section class="card">
+  <div class="card-content">
+    <div class = "card-title">Video Filter</div>
+    <form [formGroup]="filter" (ngSubmit)="filterForm()">
+      <label for="title">Video Title</label>
+      <input id="title" type="text" formControlName="title">
+      
+      <label for="author">Video Author</label>
+      <input id="author" type="text" formControlName="author">
+      <div>Region</div>
+        <p>
+          <label>
+              <input class = "blue-text" name="region" formControlName="region" type="radio" value="North America">
+              <span>North America</span>
+            </label>
+        </p>
+        <p>
+          <label>
+            <input name="region" formControlName="region" type="radio" value="Europe">
+            <span>Europe</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input name="region" formControlName="region" type="radio" value="Asia">
+            <span>Asia</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input name="region" formControlName="region" type="radio" value="All">
+            <span>All</span>
+          </label>
+        </p>
+        <div>Date Range</div>
+        <div>
+          <label for="fromDate"> From: </label>
+          <input class="date-input" id="fromDate" type="date" formControlName="fromDate">
+        </div>
+        <div>
+          <label for="toDate"> To: </label>
+          <input class="date-input" id="toDate" type="date" formControlName="toDate">
+        </div>
+        <div>Age Groups</div>
+        <p>
+          <label>
+            <input type="checkbox" checked="checked" formControlName="ageGroupUnder18" />
+            <span>Under 18</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input type="checkbox" checked="checked" formControlName="ageGroup1840" />
+            <span>18 - 40</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input type="checkbox" checked="checked" formControlName="ageGroup4060" />
+            <span>40 - 60</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input type="checkbox" checked="checked" formControlName="ageGroupOver60" />
+            <span>Over 60</span>
+          </label>
+        </p>
+        <button class="btn" [disabled]="!filter.valid" [class.disabled]="!filter.valid">Filter</button>
+    </form>
+  </div>
+</section>
+
+<section class="card">
+    <div class="card-content">
+      <div class="card-title">Filter Data</div>
+  
+      Filter Form Object:
+      <pre>{{ filter.value | json }}</pre> Form Validity:
+      <div>{{ filter.valid }}</div>
+  
+      <button class="btn" (click)="logTheForm()">Log Form Object</button>
+    </div>
+  </section>

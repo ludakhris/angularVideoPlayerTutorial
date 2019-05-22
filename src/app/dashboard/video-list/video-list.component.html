@@ -1,4 +1,3 @@
-<div class="selectedDisplay">Currently selected video: {{selectedVideo == null ? 'Nothing Selected': selectedVideo?.title}}</div>
 <div *ngFor="let v of videolist | async" (click)="selectVideo(v)">
   <app-video-card-details [video]="v" [selected]="shouldBold(v)"></app-video-card-details>
 </div> 

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { VideoDashboardComponent } from './video-dashboard/video-dashboard.component';
 import { VideoListComponent } from './video-list/video-list.component';
@@ -18,7 +19,8 @@ const dashboardRoutes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(dashboardRoutes),
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ]
 })
 export class DashboardModule { }

@@ -16,7 +16,23 @@ export class VideoDataService {
 
   loadVideos(): Observable<Video[]> {
     return this.http
-      .get<Video[]>(apiUrl + '/videos')
-      .pipe(map(v => v.slice(0, 5)));
+      .get<Video[]>(apiUrl + '/videos').pipe (
+        map(videos => [
+          ...videos,
+          {
+            title: 'Added from map!',
+            author: 'map',
+            id: 'aa',
+            viewDetails: []
+          }
+        ]),
+        map(videos => videos.map(
+          video => {
+            return {
+              ...video, title: video.title.toUpperCase()
+            }
+          }
+        ))
+      );
   }
 }
