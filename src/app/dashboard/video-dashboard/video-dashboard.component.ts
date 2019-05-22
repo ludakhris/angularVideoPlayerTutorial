@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Video } from '../../app-types';
 import { VideoDataService } from '../../video-data.service';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 const apiUrl = 'https://api.angularbootcamp.com';
 
@@ -15,20 +16,18 @@ const apiUrl = 'https://api.angularbootcamp.com';
 })
 export class VideoDashboardComponent implements OnInit {
 
-  selectedVideo: Video | undefined;
+  selectedVideoId: Observable<string>;
   videoList: Observable<Video[]>;
 
-  constructor(videoSvc: VideoDataService) {
-    this.videoList = videoSvc.loadVideos().pipe(
-      tap(videos => this.selectedVideo = videos[0])
+  constructor(videoSvc: VideoDataService, route: ActivatedRoute) {
+    this.videoList = videoSvc.loadVideos();
+
+    this.selectedVideoId = route.queryParams.pipe(
+      map(params => params['videoId'])
     );
   }
 
   ngOnInit() {
-  }
-
-  handleEvent(v: Video) {
-    this.selectedVideo = v;
   }
 
 }

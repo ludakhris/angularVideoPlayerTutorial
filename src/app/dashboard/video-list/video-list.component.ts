@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Video } from '../../app-types';
 
@@ -10,23 +11,25 @@ import { Video } from '../../app-types';
 export class VideoListComponent implements OnInit {
 
   @Input() videolist: Video[] = [];
-  @Input() selectedVideo: Video | undefined;
-  @Output() videoSelected = new EventEmitter<Video>();
+  @Input() selectedVideoId: string | undefined;
+  // @Output() videoSelected = new EventEmitter<Video>();
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
   selectVideo(v: Video) {
-    this.videoSelected.emit(v);
+    // this.videoSelected.emit(v);
+    const queryParams = { videoId: v.id };
+    void this.router.navigate([], { queryParams, queryParamsHandling: '' });
   }
 
   shouldBold(v: Video) {
-    if (typeof this.selectedVideo === 'undefined') {
+    if (typeof this.selectedVideoId === 'undefined') {
       return false;
     }
-    if (v.id === this.selectedVideo.id) {
+    if (v.id === this.selectedVideoId) {
       return true;
     } else {
       return false;

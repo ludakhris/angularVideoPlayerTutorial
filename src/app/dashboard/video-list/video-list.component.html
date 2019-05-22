@@ -1,3 +1,5 @@
-<div *ngFor="let v of videolist | async" (click)="selectVideo(v)">
+<div *ngFor="let v of videolist | async" 
+  [routerLink]=""
+  [queryParams]="{ videoId: v.id }">
   <app-video-card-details [video]="v" [selected]="shouldBold(v)"></app-video-card-details>
 </div> 

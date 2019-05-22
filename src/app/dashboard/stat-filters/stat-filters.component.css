@@ -1,0 +1,18 @@
+[type="radio"]:checked + span:after,
+[type="radio"].with-gap:checked + span:before,
+[type="radio"].with-gap:checked + span:after {
+  border: 2px solid #1565C0;
+}
+[type="radio"]:checked + span:after,
+[type="radio"].with-gap:checked + span:after {
+  background-color:#1565C0;
+}
+
+[type="checkbox"]:checked+span:not(.lever):before {
+    border-right: 2px solid #1565C0;
+    border-bottom: 2px solid #1565C0;
+}
+
+.btn, .btn-large, .btn-small {
+    background-color: #1565C0;
+}
